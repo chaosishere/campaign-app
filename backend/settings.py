@@ -18,6 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import cloudinary
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 
 cloudinary.config(
@@ -39,6 +43,10 @@ SECRET_KEY = 'django-insecure-wewrz65hq%@-5b)e6a_by3(023kssw$#7fu!c1g+4fh9@mip%t
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
