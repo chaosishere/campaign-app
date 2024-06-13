@@ -13,7 +13,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Campaign API",
       default_version='v1',
-      description="Test description",
+      description="API Backend for Campaign Subscription App",
       terms_of_service="https://github.com/chaosishere/campaign-app",
       contact=openapi.Contact(email="shendgepratham4@gmail.com"),
       license=openapi.License(name="BSD License"),
