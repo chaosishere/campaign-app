@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dj_database_url import parse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import dj_database_url
 import cloudinary
 import os
 
@@ -25,12 +27,11 @@ load_dotenv()
 
 
 cloudinary.config(
-    cloud_name = "dfvfox32d", 
-    api_key = "978374878673732",
-    api_secret = "feSD2RM66qSAbyPng7UsHrizqKU",
+    cloud_name = os.environ.get('CLOUD_NAME'),
+    api_key = os.environ.get('API_KEY'),
+    api_secret = os.environ.get('API_SECRET'),    
     secure=True
 )
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,9 +41,17 @@ cloudinary.config(
 SECRET_KEY = 'django-insecure-wewrz65hq%@-5b)e6a_by3(023kssw$#7fu!c1g+4fh9@mip%t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+
+]
+
+CSRF_TRUSTED_ORIGINS = [
+
+]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -108,6 +117,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+POSTGRES_LOCALLY = True
+if POSTGRES_LOCALLY:
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+
 
 
 # Password validation
