@@ -46,10 +46,12 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    "campaign-app-production.up.railway.app",
 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "campaign-app-production.up.railway.app",
 
 ]
 
